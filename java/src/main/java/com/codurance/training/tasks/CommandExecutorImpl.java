@@ -8,14 +8,14 @@ public class CommandExecutorImpl implements CommandExecutor {
     private final PrintWriter out;
     private final Map<String, List<Task>> tasks;
 
-    private Error errors;
+    private final Error errors;
 
-    private TaskAdder taskAdder;
-    private ToggleTask toggleTask;
+    private final TaskAdder taskAdder;
+    private final ToggleTask toggleTask;
 
-    private Helper helper;
+    private final Helper helper;
 
-    private TaskViewer taskViewer;
+    private final TaskViewer taskViewer;
 
     public CommandExecutorImpl(PrintWriter out, Map<String, List<Task>> tasks) {
         this.tasks = tasks;

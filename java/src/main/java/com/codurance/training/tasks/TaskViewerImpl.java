@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 public class TaskViewerImpl implements TaskViewer{
-    private  Map<String, List<Task>> tasks;
-    private  PrintWriter out;
+    private  final Map<String, List<Task>> tasks;
+    private  final PrintWriter out;
     public TaskViewerImpl( PrintWriter out, Map<String, List<Task>> tasks) {
         this.tasks = tasks;
         this.out = out;

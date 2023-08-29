@@ -18,6 +18,7 @@ public final class TaskList implements Runnable {
 
     private static PerformTask performTask;
 
+
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);

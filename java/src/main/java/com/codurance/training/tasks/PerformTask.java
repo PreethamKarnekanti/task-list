@@ -10,15 +10,15 @@ public class PerformTask {
     private final PrintWriter out;
 
 
-    private CommandExecutor commandExecutor;
+    private final CommandExecutor commandExecutor;
 
     public PerformTask(PrintWriter out, Map<String, List<Task>> tasks) {
         this.out = out;
         this.tasks = tasks;
+        this.commandExecutor = new CommandExecutorImpl(out, tasks);
     }
 
     public void executeTask(String commandLine) {
-        commandExecutor = new CommandExecutorImpl(out, tasks);
         commandExecutor.executeTask(commandLine);
     }
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class ToggleTaskImpl implements ToggleTask{
 
-    private  Map<String, List<Task>> tasks;
+    private  final Map<String, List<Task>> tasks;
     private final PrintWriter out;
 
     public ToggleTaskImpl(PrintWriter out, Map<String, List<Task>> tasks) {
