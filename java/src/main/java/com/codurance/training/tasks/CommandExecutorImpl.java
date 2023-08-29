@@ -6,11 +6,11 @@ import java.util.Map;
 
 public class CommandExecutorImpl implements CommandExecutor {
     private final PrintWriter out;
-    private Map<String, List<Task>> tasks;
+    private final Map<String, List<Task>> tasks;
 
     private Error errors;
 
-    private TaskAdder addToTask;
+    private TaskAdder taskAdder;
     private ToggleTask toggleTask;
 
     private Helper helper;
@@ -18,8 +18,13 @@ public class CommandExecutorImpl implements CommandExecutor {
     private TaskViewer taskViewer;
 
     public CommandExecutorImpl(PrintWriter out, Map<String, List<Task>> tasks) {
-        this.out = out;
         this.tasks = tasks;
+        this.out = out;
+        this.errors = new ErrorImpl(out);
+        this.taskAdder = new TaskAdderImpl(out, tasks);
+        this.toggleTask = new ToggleTaskImpl(out, tasks);
+        this.helper = new HelperImpl(out);
+        this.taskViewer = new TaskViewerImpl(out, tasks);
     }
 
     @Override
@@ -28,27 +33,21 @@ public class CommandExecutorImpl implements CommandExecutor {
         String command = commandRest[0];
         switch (command) {
             case "show":
-                taskViewer = new TaskViewerImpl(out, tasks);
                 taskViewer.show();
                 break;
             case "add":
-                addToTask = new TaskAdderImpl(out, tasks);
-                addToTask.add(commandRest[1]);
+                taskAdder.add(commandRest[1]);
                 break;
             case "check":
-                toggleTask = new ToggleTaskImpl(out, tasks);
                 toggleTask.toggle(commandRest[1], true);
                 break;
             case "uncheck":
-                toggleTask = new ToggleTaskImpl(out, tasks);
                 toggleTask.toggle(commandRest[1], false);
                 break;
             case "help":
-                helper = new HelperImpl(out);
                 helper.help();
                 break;
             default:
-                errors = new ErrorImpl(out);
                 errors.showError(command);
                 break;
         }

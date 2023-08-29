@@ -16,17 +16,18 @@ public final class TaskList implements Runnable {
     private final BufferedReader in;
     private final PrintWriter out;
 
-    private PerformTask performTask;
+    private static PerformTask performTask;
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
-        new TaskList(in, out).run();
+        new TaskList(in, out, performTask).run();
     }
 
-    public TaskList(BufferedReader reader, PrintWriter writer) {
+    public TaskList(BufferedReader reader, PrintWriter writer,PerformTask performTask) {
         this.in = reader;
         this.out = writer;
+        this.performTask = new PerformTask(this.out, tasks);
     }
 
     public void run() {
@@ -47,7 +48,6 @@ public final class TaskList implements Runnable {
     }
 
     private void execute(String commandLine) {
-        performTask = new PerformTask(out, tasks);
         performTask.executeTask(commandLine);
     }
 }
