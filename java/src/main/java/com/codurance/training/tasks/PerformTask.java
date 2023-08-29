@@ -7,52 +7,18 @@ import java.util.Map;
 
 public class PerformTask {
     private  Map<String, List<Task>> tasks;
-    private final BufferedReader in;
     private final PrintWriter out;
-    private Error errors;
 
-    private AddToTask addToTask;
-    private ToggleTask toggleTask;
+    private CommandExecutor commandExecutor;
 
-    private Helper helper;
-
-    private TaskViewer taskViewer;
-
-    public PerformTask(BufferedReader in, PrintWriter out, Map<String, List<Task>> tasks) {
-        this.in = in;
+    public PerformTask(PrintWriter out, Map<String, List<Task>> tasks) {
         this.out = out;
         this.tasks = tasks;
     }
 
     public void executeTask(String commandLine) {
-        String[] commandRest = commandLine.split(" ", 2);
-        String command = commandRest[0];
-        switch (command) {
-            case "show":
-                taskViewer = new TaskViewerImpl(out, tasks);
-                taskViewer.show();
-                break;
-            case "add":
-                addToTask = new AddToTaskImpl(tasks);
-                addToTask.add(commandRest[1]);
-                break;
-            case "check":
-                toggleTask = new ToggleTaskImpl(tasks);
-                toggleTask.toggle(commandRest[1], true);
-                break;
-            case "uncheck":
-                toggleTask = new ToggleTaskImpl(tasks);
-                toggleTask.toggle(commandRest[1], false);
-                break;
-            case "help":
-                helper = new HelperImpl();
-                helper.help();
-                break;
-            default:
-                errors = new ErrorImpl();
-                errors.showError(command);
-                break;
-        }
+        commandExecutor = new CommandExecutorImpl(out, tasks);
+        commandExecutor.executeTask(commandLine);
     }
 }
 

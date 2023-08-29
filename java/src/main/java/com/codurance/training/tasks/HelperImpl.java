@@ -3,7 +3,12 @@ package com.codurance.training.tasks;
 import java.io.PrintWriter;
 
 public class HelperImpl implements  Helper{
-    private  final PrintWriter out = new PrintWriter(System.out);
+    private  final PrintWriter out;
+
+    public HelperImpl(PrintWriter out) {
+        this.out = out;
+    }
+
     @Override
     public void help() {
         out.println("Commands:");

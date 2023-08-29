@@ -1,5 +1,5 @@
 package com.codurance.training.tasks;
 
-public interface AddToTask {
+public interface TaskAdder {
     void add(String commandLine);
 }

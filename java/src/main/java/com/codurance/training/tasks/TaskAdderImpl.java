@@ -5,15 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class AddToTaskImpl implements  AddToTask {
+public class TaskAdderImpl implements TaskAdder {
     private Map<String, List<Task>> tasks;
     private static long lastId = 0;
 
-    private final PrintWriter out = new PrintWriter(System.out);
+    private final PrintWriter out;
 
 
-    public AddToTaskImpl(Map<String, List<Task>> tasks) {
+    public TaskAdderImpl(PrintWriter out, Map<String, List<Task>> tasks) {
         this.tasks = tasks;
+        this.out = out;
     }
 
     @Override

@@ -4,7 +4,11 @@ import java.io.PrintWriter;
 
 public class ErrorImpl implements  Error{
 
-    private final PrintWriter out = new PrintWriter(System.out);
+    private final PrintWriter out;
+
+    public ErrorImpl(PrintWriter out) {
+        this.out = out;
+    }
 
     @Override
     public void showError(String command) {

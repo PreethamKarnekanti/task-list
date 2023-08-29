@@ -47,7 +47,7 @@ public final class TaskList implements Runnable {
     }
 
     private void execute(String commandLine) {
-        performTask = new PerformTask(in, out, tasks);
+        performTask = new PerformTask(out, tasks);
         performTask.executeTask(commandLine);
     }
 }

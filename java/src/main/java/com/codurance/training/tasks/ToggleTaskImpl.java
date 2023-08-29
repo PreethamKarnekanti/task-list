@@ -7,10 +7,11 @@ import java.util.Map;
 public class ToggleTaskImpl implements ToggleTask{
 
     private  Map<String, List<Task>> tasks;
-    private final PrintWriter out = new PrintWriter(System.out);
+    private final PrintWriter out;
 
-    public ToggleTaskImpl(Map<String, List<Task>> tasks) {
+    public ToggleTaskImpl(PrintWriter out, Map<String, List<Task>> tasks) {
         this.tasks = tasks;
+        this.out = out;
     }
 
     @Override
